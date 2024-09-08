@@ -1,0 +1,98 @@
+.card {
+  margin-top: 2rem;
+  width: 30rem;
+  border-radius: 1rem;
+  padding: 0rem 1rem 2rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+.image {
+}
+.image img {
+  object-fit: cover;
+  object-position: 50% 50%;
+  width: 100%;
+}
+
+.price {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  align-items: center;
+}
+
+.price_current {
+  font-weight: 700;
+  font-size: 2rem;
+}
+
+.price_old {
+  font-weight: 600;
+  font-size: 1.5rem;
+  color: grey;
+  text-decoration: line-through;
+}
+
+.price_special {
+  font-weight: 600;
+  font-size: 1.5rem;
+  color: #a73afd;
+}
+
+.name {
+  line-height: 1.5;
+}
+
+.tag {
+  color: grey;
+}
+
+.divider {
+  color: grey;
+  margin-right: 0.3rem;
+  margin-left: 0.3rem;
+}
+
+.rating {
+  display: flex;
+  gap: 0.3rem;
+  align-items: center;
+}
+
+.rating_number {
+  color: grey;
+}
+
+.rassrochka {
+  border-radius: 1rem;
+  background: linear-gradient(to right, rgb(164, 245, 218), rgb(243, 227, 138));
+  padding: 0.5rem;
+  display: inline-block;
+  text-transform: uppercase;
+  font-weight: 600;
+  width: 10rem;
+  margin-bottom: 0.5rem;
+}
+
+.buttons {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.buttons button {
+  background-color: #a73afd;
+  color: white;
+  border: none;
+  padding: 0.5rem 2rem;
+  font-weight: 700;
+  border-radius: 0.3rem;
+  font-size: 1rem;
+}
+
+.buttons button:hover {
+  cursor: pointer;
+}

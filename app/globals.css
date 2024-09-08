@@ -22,6 +22,7 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  padding: 4rem;
 }
 
 * {
@@ -35,8 +36,34 @@ a {
   text-decoration: none;
 }
 
-@media (prefers-color-scheme: dark) {
+.container {
+  display: flex;
+  width: 100%;
+  margin-top: 5rem;
+
+  gap: 2rem;
+}
+h1 {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+h2 {
+  margin-bottom: 1rem;
+}
+
+a {
+  text-decoration: none;
+}
+
+@media (max-width: 1400px) {
+  .container {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 545px) {
   html {
-    color-scheme: dark;
+    font-size: 10px;
   }
 }
