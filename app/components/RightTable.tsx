@@ -33,8 +33,13 @@ export default function Main() {
       const message = JSON.parse(event.data);
       setWsMessages((prevMessages) => [...prevMessages, message]);
       dispatch(addMessage(message));
-      if (loading) setLoading(false);
-      console.log(message);
+
+      setLoading((prevLoading) => {
+        if (prevLoading) {
+          return false;
+        }
+        return prevLoading;
+      });
     };
 
     ws.onerror = (error) => {
