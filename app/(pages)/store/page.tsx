@@ -22,7 +22,7 @@ export default function Store() {
         <span className={style.divider}>/</span>
         <span className={style.tag}>Смартфон iPhone 12 Pro 128Gb</span>
         <span className={style.divider}>/</span>
-        <span className={style.tag}>6.1" </span>
+        <span className={style.tag}>6.1&#34; </span>
         <span className={style.divider}>/</span>
         <span className={style.tag}>2532x1170</span>
         <span className={style.divider}>/</span>
