@@ -15,10 +15,11 @@ import {
   CircularProgress,
   Box,
 } from "@mui/material";
+import { WsMessage } from "../types/types";
 
 export default function Main() {
   const dispatch = useAppDispatch();
-  const [wsMessages, setWsMessages] = useState<any[]>([]);
+  const [wsMessages, setWsMessages] = useState<WsMessage[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -33,6 +34,7 @@ export default function Main() {
       setWsMessages((prevMessages) => [...prevMessages, message]);
       dispatch(addMessage(message));
       if (loading) setLoading(false);
+      console.log(message);
     };
 
     ws.onerror = (error) => {

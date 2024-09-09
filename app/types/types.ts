@@ -19,3 +19,8 @@ export interface UsersState {
 export interface WebSocketState {
   messages: string[];
 }
+
+export interface WsMessage {
+  ctime: number;
+  event: string;
+}

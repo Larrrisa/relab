@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
-import { UserItem, UsersState } from "../types/types";
+import { UsersState } from "../types/types";
 
 const initialState: UsersState = {
   total: 15,

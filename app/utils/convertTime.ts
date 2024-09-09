@@ -1,4 +1,4 @@
-export default function convertTime(UNIX_timestamp: any) {
+export default function convertTime(UNIX_timestamp: number) {
   const a = new Date(UNIX_timestamp * 1000);
   const months = [
     "Jan",
