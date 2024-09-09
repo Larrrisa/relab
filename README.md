@@ -1,3 +1,11 @@
+
+## Технологии
+
+- **Next.js**: Для создания пользовательского интерфейса.
+- **Redux Toolkit**: Для управления состоянием приложения.
+- **Material UI и CSS**: Для стилизации компонентов.
+
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
