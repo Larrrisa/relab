@@ -2,6 +2,6 @@
 
 import { redirect } from "next/navigation";
 
-export default async function redirectToMain() {
+export default async function redirectToLogin() {
   redirect(`/login`);
 }

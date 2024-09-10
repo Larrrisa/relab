@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { WebSocketState } from "../types/types";
+import { WebSocketState, WsMessage } from "../types/types";
 
 const initialState: WebSocketState = {
   messages: [],
@@ -9,7 +9,7 @@ const websocketSlice = createSlice({
   name: "websocket",
   initialState,
   reducers: {
-    addMessage: (state, action: PayloadAction<string>) => {
+    addMessage: (state, action: PayloadAction<WsMessage>) => {
       state.messages.push(action.payload);
     },
     clearMessages: (state) => {

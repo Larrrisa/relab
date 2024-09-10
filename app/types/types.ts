@@ -17,7 +17,7 @@ export interface UsersState {
 }
 
 export interface WebSocketState {
-  messages: string[];
+  messages: WsMessage[];
 }
 
 export interface WsMessage {

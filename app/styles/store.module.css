@@ -1,6 +1,14 @@
+.row {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
 .card {
   margin-top: 2rem;
-  width: 30rem;
+  width: 20rem;
+  height: auto;
   border-radius: 1rem;
   padding: 0rem 1rem 2rem 1rem;
   display: flex;
@@ -10,11 +18,16 @@
 }
 
 .image {
+  height: 20rem;
+  width: 18rem;
+  margin-bottom: 2rem;
 }
+
 .image img {
-  object-fit: cover;
+  object-fit: contain;
   object-position: 50% 50%;
   width: 100%;
+  height: auto;
 }
 
 .price {
@@ -95,4 +108,7 @@
 
 .buttons button:hover {
   cursor: pointer;
+}
+
+@media (max-width: 545px) {
 }

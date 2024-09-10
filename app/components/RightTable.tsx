@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useAppDispatch } from "../redux/hooks";
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { addMessage } from "../redux/websocketSlice";
 import convertTime from "../utils/convertTime";
 import {
@@ -15,11 +15,10 @@ import {
   CircularProgress,
   Box,
 } from "@mui/material";
-import { WsMessage } from "../types/types";
 
 export default function Main() {
   const dispatch = useAppDispatch();
-  const [wsMessages, setWsMessages] = useState<WsMessage[]>([]);
+  const messages = useAppSelector((state) => state.websocket.messages);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -31,7 +30,6 @@ export default function Main() {
 
     ws.onmessage = (event) => {
       const message = JSON.parse(event.data);
-      setWsMessages((prevMessages) => [...prevMessages, message]);
       dispatch(addMessage(message));
 
       setLoading((prevLoading) => {
@@ -79,7 +77,7 @@ export default function Main() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {wsMessages.map((message) => (
+              {messages.map((message) => (
                 <TableRow key={message.ctime}>
                   <TableCell style={{ width: 300 }}>
                     {convertTime(message.ctime)}

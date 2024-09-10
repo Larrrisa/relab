@@ -13,36 +13,56 @@ export default function LoginPage() {
   const [passwordError, setPasswordError] = useState("");
   const [emailError, setEmailError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [firstFormCheck, setFirstFormCheck] = useState(false);
 
-  function checkEmail() {
+  function checkEmail(value: string) {
     const EMAIL_REGEXP =
       /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
 
-    if (email.length === 0) {
+    if (value.length === 0) {
       setEmailError("Заполните поле");
       return false;
-    } else if (!EMAIL_REGEXP.test(email)) {
+    } else if (!EMAIL_REGEXP.test(value)) {
       setEmailError("Неправильный формат email");
       return false;
     }
-
+    setEmailError("");
     return true;
   }
 
-  function checkPassword() {
-    const trimmedPassword = password.trim();
-    const PASSWORD_REGEXP = /^(?=.*[A-Z]).{8,}$/;
+  function checkPassword(value: string) {
+    const trimmedPassword = value.trim();
+    const PASSWORD_REGEXP = /^(?=.*[A-Z])\S{8,}$/;
 
-    if (password.length === 0) {
+    if (value.length === 0) {
       setPasswordError("Заполните поле");
       return false;
     } else if (!PASSWORD_REGEXP.test(trimmedPassword)) {
       setPasswordError(
-        "Пароль должен быть минимум 8 символов и содержать хотя бы одну заглавную букву."
+        "Пароль должен быть минимум 8 символов без пробелов и содержать хотя бы одну заглавную букву."
       );
       return false;
     }
+    setPasswordError("");
     return true;
+  }
+
+  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const { value, type } = e.target;
+    if (type === "email") {
+      setEmail(value);
+      if (firstFormCheck) {
+        checkEmail(value);
+      }
+    }
+
+    if (type === "password") {
+      const pureValue = value.replace(/\s/g, "");
+      setPassword(pureValue);
+      if (firstFormCheck) {
+        checkPassword(pureValue);
+      }
+    }
   }
 
   function checkForm(e: React.FormEvent<HTMLFormElement>) {
@@ -51,8 +71,8 @@ export default function LoginPage() {
     setEmailError("");
     setPasswordError("");
 
-    const isEmailValid = checkEmail();
-    const isPasswordValid = checkPassword();
+    const isEmailValid = checkEmail(email);
+    const isPasswordValid = checkPassword(password);
 
     if (isEmailValid && isPasswordValid) {
       setLoading(true);
@@ -61,6 +81,8 @@ export default function LoginPage() {
         localStorage.setItem("isAuthenticated", "true");
         redirectToMain();
       }, 2000);
+    } else {
+      setFirstFormCheck(true);
     }
   }
 
@@ -82,11 +104,11 @@ export default function LoginPage() {
             type="email"
             required
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
             disabled={loading}
             error={!!emailError}
             helperText={emailError ? emailError : ""}
             sx={{ height: 56 }}
+            onChange={handleChange}
           />
           <TextField
             id="outlined-password"
@@ -95,11 +117,11 @@ export default function LoginPage() {
             type="password"
             required
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
             disabled={loading}
             error={!!passwordError}
             helperText={passwordError ? passwordError : ""}
             sx={{ height: 56 }}
+            onChange={handleChange}
           />
 
           <Button
