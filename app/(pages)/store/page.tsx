@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
 import iphone from "../../images/iphone.webp";
@@ -5,8 +7,18 @@ import style from "../../styles/store.module.css";
 import Box from "@mui/material/Box";
 import Rating from "@mui/material/Rating";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
+import { useEffect } from "react";
+import redirectToLogin from "../../utils/redirectToLogin";
 
 export default function Store() {
+  useEffect(() => {
+    const authStatus = localStorage.getItem("isAuthenticated");
+
+    if (authStatus === null || authStatus === "false") {
+      redirectToLogin();
+    }
+  }, []);
+
   return (
     <div className={style.row}>
       <div className={style.card}>
