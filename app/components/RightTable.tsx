@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { addMessage } from "../redux/websocketSlice";
 import convertTime from "../utils/convertTime";
@@ -20,15 +20,18 @@ export default function Main() {
   const dispatch = useAppDispatch();
   const messages = useAppSelector((state) => state.websocket.messages);
   const [loading, setLoading] = useState(true);
+  const wsRef = useRef<WebSocket | null>(null);
 
   useEffect(() => {
-    const ws = new WebSocket("wss://test.dev-relabs.ru/event");
-
-    ws.onopen = () => {
+    if (!wsRef.current || wsRef.current.readyState === WebSocket.CLOSED) {
+      const ws = new WebSocket("wss://test.dev-relabs.ru/event");
+      wsRef.current = ws;
+    }
+    wsRef.current.onopen = () => {
       console.log("WebSocket connected");
     };
 
-    ws.onmessage = (event) => {
+    wsRef.current.onmessage = (event) => {
       const message = JSON.parse(event.data);
       dispatch(addMessage(message));
 
@@ -39,17 +42,19 @@ export default function Main() {
         return prevLoading;
       });
     };
-
-    ws.onerror = (error) => {
+    wsRef.current.onerror = (error) => {
       console.error("WebSocket error:", error);
     };
 
-    ws.onclose = () => {
+    wsRef.current.onclose = () => {
       console.log("WebSocket disconnected");
+      wsRef.current = null;
     };
 
     return () => {
-      ws.close();
+      if (wsRef.current && wsRef.current.readyState === WebSocket.OPEN) {
+        wsRef.current.close();
+      }
     };
   }, [dispatch]);
 
